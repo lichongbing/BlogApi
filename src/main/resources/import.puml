@@ -1,0 +1,22 @@
+@startuml
+participant Actor
+Actor -> PostRearchVoController : getallPostRearchVo
+activate PostRearchVoController
+PostRearchVoController -> PostSearchService : importAll
+activate PostSearchService
+PostSearchService -> PostSearchServiceImpl : importAll
+activate PostSearchServiceImpl
+PostSearchServiceImpl -> PostSearchServiceImpl : addPostRearchVo
+activate PostSearchServiceImpl
+PostSearchServiceImpl -> PostSearchServiceImpl : beanToMap
+activate PostSearchServiceImpl
+PostSearchServiceImpl --> PostSearchServiceImpl
+deactivate PostSearchServiceImpl
+PostSearchServiceImpl --> PostSearchServiceImpl
+deactivate PostSearchServiceImpl
+PostSearchServiceImpl --> PostSearchService
+deactivate PostSearchServiceImpl
+PostSearchService --> PostRearchVoController
+deactivate PostSearchService
+return
+@enduml
