@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@Api(tags = "专题分类信息") 
+@Api(tags = "专题分类信息")
 @RestController
 public class ChannelController {
     

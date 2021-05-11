@@ -1,0 +1,25 @@
+<!-- 简单元素 -->
+<transition>
+  <div v-if="ok">toggled content</div>
+</transition>
+
+<!-- 动态组件 -->
+<transition name="fade" mode="out-in" appear>
+  <component :is="view"></component>
+</transition>
+
+<!-- 事件钩子 -->
+<div id="transition-demo">
+  <transition @after-enter="transitionComplete">
+    <div v-show="ok">toggled content</div>
+  </transition>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return { visible: false }
+        }
+    })
+</script>
