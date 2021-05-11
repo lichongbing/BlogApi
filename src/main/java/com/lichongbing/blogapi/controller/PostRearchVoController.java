@@ -1,5 +1,7 @@
 package com.lichongbing.blogapi.controller;
 
+import com.lichongbing.blogapi.result.ExceptionMsg;
+import com.lichongbing.blogapi.result.ResponseData;
 import com.lichongbing.blogapi.search.PostSearchService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -43,14 +45,19 @@ public class PostRearchVoController {
 //    }
     @ApiOperation("检索文章内容")
     @RequestMapping(value = "/content", method = RequestMethod.GET)
-    public List<PostRearchVo> searchTerm (@RequestParam(value = "title", required = false) String title,
+    public ResponseData searchTerm (@RequestParam(value = "title", required = false) String title,
                                     @RequestParam(value = "summary", required = false) String summary) {
         try {
-            if(StringUtils.isNoneBlank(title))
-                return postSearchService.searchTerm("title",title);
+            if(StringUtils.isNoneBlank(title)) {
+                List<PostRearchVo> postRearchVoList = postSearchService.searchTerm("title", title);
+           
+            return new ResponseData(ExceptionMsg.SUCCESS,postRearchVoList);
+            }
+            else if(StringUtils.isNoneBlank(summary)) {
+                List<PostRearchVo> postRearchVoList = postSearchService.searchTerm("summary", summary);
 
-            else if(StringUtils.isNoneBlank(summary))
-                return postSearchService.searchTerm("summary",summary);
+            return new ResponseData(ExceptionMsg.SUCCESS,postRearchVoList);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

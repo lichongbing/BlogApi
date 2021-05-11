@@ -1,5 +1,7 @@
 package com.lichongbing.blogapi.controller;
 
+import com.lichongbing.blogapi.result.ExceptionMsg;
+import com.lichongbing.blogapi.result.ResponseData;
 import com.lichongbing.blogapi.service.PostAttributeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,8 +19,8 @@ public class PostAttributeController {
     PostAttributeService postAttributeService;
     @ApiOperation("通过主键查询文章内容")
     @GetMapping("{id}")
-    public  String getContent(@PathVariable Integer id) {
-        return  postAttributeService.getPostContent(id);
+    public ResponseData getContent(@PathVariable Integer id) {
+        String content = postAttributeService.getPostContent(id);
+        return new ResponseData(ExceptionMsg.SUCCESS,content);
     }
-
 }

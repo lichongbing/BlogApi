@@ -16,6 +16,8 @@ public class PostRearchVoService {
     @Resource
     PostAttributeService postAttributeService;
 
+
+
     public List<PostRearchVo> getAllpostRearchVo() {
 
         List<Post> allPost = postService.getAllPost();
